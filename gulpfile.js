@@ -1,32 +1,17 @@
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var reactify = require('reactify');
-var concat = require('gulp-concat');
-var sourcemaps = require('gulp-sourcemaps');
+var gulp  = require('gulp'),
+    gutil = require('gulp-util'),
+    prod  = gutil.env.prod;
 
-gulp.task('develop', function() {
-  var bundler = browserify({
-    entries: ['./app/index.js'],
-    transform: [reactify],
-    debug: true,
-    cache: {}, packageCache: {}, fullPaths: true
-  });
+gulp.task('js', function () {
+  var browserify = require('browserify'),
+      source     = require('vinyl-source-stream'),
+      streamify  = require('gulp-streamify');
 
-  var watcher = watchify(bundler);
-
-  return watcher
-    .on('update', function() {
-      console.log('start build');
-      watcher.bundle() // starts the bundle
-        .pipe(source('index.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./build/'));
-      console.log('finish build');
+  return browserify('./app/index.js', {
+      debug: !prod
     })
     .bundle()
-    .pipe(source('index.js'))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./build/'));
+    .pipe(source()) // convert to a stream gulp understands
+    .pipe(prod ? stream(uglify()) : gutil.noop())
+    .pipe(gulp.dest('./build'));
 });
