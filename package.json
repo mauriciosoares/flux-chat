@@ -1,0 +1,30 @@
+{
+  "name": "flux-chat",
+  "version": "0.0.1",
+  "description": "A chat created with React.js and Flux.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mauriciosoares/flux-chat.git"
+  },
+  "author": "Mauricio Soares",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mauriciosoares/flux-chat/issues"
+  },
+  "homepage": "https://github.com/mauriciosoares/flux-chat",
+  "devDependencies": {
+    "browserify": "^11.0.0",
+    "flux": "^2.0.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "object-assign": "^3.0.0",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.3.0"
+  }
+}
